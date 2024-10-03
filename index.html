@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulación de Péndulo Simple y Gravedad</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        body,
+        html {
+            background-color: black;
+            color: white;
+            scroll-behavior: smooth;
+            font-family: Arial, sans-serif;
+            max-width: 1280px;
+            margin: auto;
+            padding: 3rem;
+            font-size: 1.25rem;
+            line-height: 1.5rem;
+            background-image:
+                radial-gradient(circle, rgba(70, 70, 70, 0.3) 1px, transparent 1px),
+                radial-gradient(circle, rgba(70, 70, 70, 0.3) 1px, transparent 1px);
+            background-size: 70px 70px;
+            background-position: 20px 20px, 20px 20px;
+        }
+
+        h1,
+        h2 {
+            text-align: center;
+            color: #f07373;
+            padding-bottom: 1rem;
+        }
+
+        p {
+            line-height: 1.6;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Simulación de Péndulo Simple y Gravedad</h1>
+
+    <p id="gravity"></p>
+
+    <div id="newtonsCradleDiv">
+        <h2>Péndulo Simple</h2>
+        <p>
+            Un péndulo simple es un modelo ideal de un sistema más complejo. Consiste en un cuerpo de masa \( m \),
+            suspendido de un hilo inextensible y de masa despreciable en un campo gravitacional uniforme. Cuando el
+            cuerpo se desvía de su posición de equilibrio y se libera, empieza a oscilar a lado y lado de esa posición.
+            Sin embargo, para que dicha oscilación pueda definirse como movimiento armónico simple, la fuerza
+            restauradora debe ser proporcional a la coordenada \( x \). Esto solo se cumple para oscilaciones con
+            ángulos menores o iguales a 15 grados.
+            $$ E_p = mgL(1 - \cos{\theta}) $$
+
+        </p>
+
+        <p>
+            La velocidad máxima del péndulo se puede obtener aplicando el principio de conservación de la energía
+            mecánica. En los extremos del movimiento, la energía mecánica es igual a la energía potencial. Sin embargo,
+            en el punto de equilibrio, la energía mecánica equivale a la energía cinética. En consecuencia, si se
+            igualan las dos expresiones, se puede despejar la velocidad.
+            $$ E_k = \frac{1}{2}mv^2 $$
+
+            $$ v_{\text{max}} = \sqrt{2gL(1 - \cos{\theta})} $$
+        </p>
+
+        <p>
+            Un péndulo simple se comporta como un oscilador armónico cuando oscila con amplitudes pequeñas. La fuerza
+            restauradora es la componente tangencial del peso, y la aceleración del péndulo es proporcional al
+            desplazamiento pero de sentido contrario, con la siguiente expresión:
+        </p>
+
+        <p>
+            $$ a = -\frac{g}{l} x $$
+        </p>
+
+        <h3>Donde:</h3>
+        <ul>
+            <li><strong>a:</strong> Aceleración del péndulo, en \( \text{m/s}^2 \)</li>
+            <li><strong>g:</strong> Aceleración de la gravedad, con un valor de \( 9.8 \, \text{m/s}^2 \)</li>
+            <li><strong>l:</strong> Longitud del péndulo, en metros (\( m \))</li>
+            <li><strong>x:</strong> Desplazamiento desde la posición de equilibrio, en metros (\( m \))</li>
+        </ul>
+
+        <h3>Período del Péndulo Simple</h3>
+        <p>
+            El período de un péndulo simple, para oscilaciones de poca amplitud, viene determinado por la longitud \( l
+            \) del péndulo y la gravedad \( g \). No influye la masa del cuerpo que oscila ni la amplitud de la
+            oscilación. El período se define como el tiempo que tarda en realizar una oscilación completa, y su
+            expresión es:
+        </p>
+
+        <p>
+            $$ T = 2\pi \sqrt{\frac{l}{g}} $$
+        </p>
+
+        <h3>Donde:</h3>
+        <ul>
+            <li><strong>T:</strong> Período del péndulo, en segundos (\( s \))</li>
+            <li><strong>l:</strong> Longitud del péndulo, en metros (\( m \))</li>
+            <li><strong>g:</strong> Aceleración de la gravedad, en \( \text{m/s}^2 \)</li>
+        </ul>
+    </div>
+    
+
+    <div id="gravityDiv">
+        
+        <h2>Ley de la Gravitación Universal</h2>
+        <p>
+            La ley de la gravitación universal, formulada por Isaac Newton, describe la interacción entre los cuerpos
+            celestes y establece que cualquier cuerpo del universo atrae a todos los demás cuerpos con una fuerza
+            directamente proporcional al producto de sus masas e inversamente proporcional al cuadrado de las distancias
+            que los separan. La fórmula es:
+        </p>
+
+        <p>
+            $$ F = \frac{G m_1 m_2}{r^2} $$
+        </p>
+
+        <h3>Donde:</h3>
+        <ul>
+            <li><strong>F:</strong> Fuerza gravitacional entre los cuerpos, en Newtons (\( N \))</li>
+            <li><strong>G:</strong> Constante de gravitación universal (\( 6.674 \times 10^{-11} \,
+                \text{Nm}^2/\text{kg}^2 \))</li>
+            <li><strong>m_1, m_2:</strong> Masas de los dos cuerpos, en kilogramos (\( kg \))</li>
+            <li><strong>r:</strong> Distancia entre los cuerpos, en metros (\( m \))</li>
+        </ul>
+
+        <h2>Caída Libre</h2>
+        <p>
+            La caída libre es un movimiento rectilíneo uniformemente acelerado en el que un objeto cae bajo la acción
+            exclusiva de la gravedad. Despreciando la resistencia del aire, las ecuaciones del movimiento son:
+        </p>
+
+        <h3>Ecuación de la posición:</h3>
+        <p>
+            $$ y = H - \frac{1}{2} g t^2 $$
+        </p>
+
+        <h3>Ecuación de la velocidad:</h3>
+        <p>
+            $$ v = g t $$
+        </p>
+
+        <h3>Donde:</h3>
+        <ul>
+            <li><strong>y:</strong> Posición del objeto, en metros (\( m \))</li>
+            <li><strong>H:</strong> Altura inicial desde la que cae el objeto, en metros (\( m \))</li>
+            <li><strong>g:</strong> Aceleración de la gravedad (\( 9.8 \, \text{m/s}^2 \))</li>
+            <li><strong>t:</strong> Tiempo transcurrido, en segundos (\( s \))</li>
+            <li><strong>v:</strong> Velocidad del objeto, en metros por segundo (\( \text{m/s} \))</li>
+        </ul>
+        
+    </div>
+
+    <div id="gravityDiv1"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.17.1/matter.min.js"></script>
+    <script src="newtonsCradle.js"></script>
+    <script src="gravity1.js"></script>
+    <script src="gravity.js"></script>
+
+    <script>
+        window.onload = function () {
+            Example.newtonsCradle();
+            Example.gravity();
+            Example1.gravity()
+        };
+    </script>
+</body>
+
+</html>
