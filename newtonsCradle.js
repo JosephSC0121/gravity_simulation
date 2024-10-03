@@ -26,16 +26,13 @@ Example.newtonsCradle = function() {
 
     Render.run(render);
 
-    // Crear runner
     var runner = Runner.create();
     Runner.run(runner, engine);
 
-    // Crear la estructura de Newton's Cradle
     var cradle = Example.newtonsCradle.newtonsCradle(100, 100, 5, 30, 400);
     Composite.add(world, cradle);
     Body.translate(cradle.bodies[0], { x: -180, y: -100 });
 
-    // Control del ratón
     var mouse = Mouse.create(render.canvas),
         mouseConstraint = MouseConstraint.create(engine, {
             mouse: mouse,
@@ -49,17 +46,14 @@ Example.newtonsCradle = function() {
 
     Composite.add(world, mouseConstraint);
 
-    // Mantener el ratón sincronizado con el renderizado
     render.mouse = mouse;
 
-    // Ajustar la vista del render al escenario
     Render.lookAt(render, {
         min: { x: 0, y: 50 },
         max: { x: 400, y: 600 }
     });
 };
 
-// Función para crear Newton's Cradle
 Example.newtonsCradle.newtonsCradle = function(xx, yy, number, size, length) {
     var Composite = Matter.Composite,
         Constraint = Matter.Constraint,
